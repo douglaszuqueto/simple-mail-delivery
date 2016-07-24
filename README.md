@@ -1,7 +1,8 @@
 # Aplicação simples para envio de email.
 
-## Tecnologias Utilizadas
-
- * SMTP do Google
- * NodeMailer
- * RabbitMQ
+ * Envio utilizando o SMTP do Google
+ * NodeJS
+   * API
+   * Pacote NodeMailer
+   * Pacote amqp.node
+ * RabbitMQ para gerenciamento de filas
