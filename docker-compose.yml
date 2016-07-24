@@ -1,0 +1,34 @@
+version: '2'
+
+services:
+  rabbitmq:
+    container_name: mail-rabbitq
+    image: rabbitmq:3
+    ports: 
+      - 5672:5672
+
+  app-api:
+    container_name: mail-app
+    image: douglaszuqueto/alpine-nodejs:6.3.0
+    volumes:
+      - .:/app
+    working_dir: /app
+    ports:
+      - 3000:3000
+    links:
+      - rabbitmq
+    command: npm start
+
+  app-subscriber:
+    container_name: mail-subscriber
+    image: douglaszuqueto/alpine-nodejs:6.3.0
+    volumes:
+      - .:/app
+    working_dir: /app
+    links:
+      - rabbitmq
+    command: node amqp
+    environment:
+      - MAIL_KEY
+      - MAIL='douglas.zuqueto@gmail.com'
+
